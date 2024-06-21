@@ -1,8 +1,18 @@
-import React from 'react'
 import styled from "styled-components";
 import DeleteAllUsers from './DeleteAllUsers'
+import { fakeUserData } from '../api';
+import { useDispatch } from 'react-redux';
+import { userSlice } from '../store/slices/UserSlice';
+import DisplayUsers from './DisplayUsers'
+
 
 export const UserDetails = () => {
+  const dispath = useDispatch()
+  const addNewUser =(name)=>{
+   console.log(name);
+   console.log(userSlice.actions.addUser(name));
+    dispath(userSlice.actions.addUser(name))
+  }
   return (
     <Wrapper>
     <div className="content">
@@ -10,9 +20,12 @@ export const UserDetails = () => {
             <div className="admin-subtitle">
                 List Of User Details
             </div>
-            <button className='btn add-btn'>Add New Users</button>
+            <button className='btn add-btn' onClick={()=>{addNewUser(fakeUserData())}}>Add New Users</button>
         </div>
-        <ul><li>Hi</li></ul><hr/>
+        <ul>
+            <DisplayUsers/>
+        </ul>
+        
         <DeleteAllUsers/>
     </div>
     </Wrapper>

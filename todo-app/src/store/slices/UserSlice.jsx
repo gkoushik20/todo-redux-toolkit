@@ -1,13 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const users = createSlice({
+const userSlice = createSlice({
     name:'user',
     initialState:[],
     reducers:{
-        addUser(state,action){},
-        removeUser(state,action){},
-        clearUser(state,action){}
+        addUser(state,action){
+            state.push(action.payload)
+        },
+         removeUser(state,action){
+            state.splice(action.payload, 1);
+         },
+         clearAllUser(){
+          return []
+         }
     }
 });
 
-export {users}
+export {userSlice}
